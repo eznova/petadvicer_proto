@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Pet Management{% endblock %}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    {% block styles %}{% endblock %}
+</head>
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Логотип и название сайта -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{{ url_for('index') }}">
+                    <img alt="Logo" src="https://ecodrug117.ucoz.ru/_si/0/14259037.jpg" width="30" height="30" class="d-inline-block align-top">
+                </a>
+                <a class="navbar-brand" href="{{ url_for('index') }}">Pet Management</a>
+            </div>
+
+            <!-- Навигационное меню -->
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ url_for('index') }}">Главная</a></li>
+                    <li><a href="{{ url_for('pet_profile') }}">Профиль питомца</a></li>
+                    <li><a href="{{ url_for('about') }}">О проекте</a></li>
+                    <li><a href="{{ url_for('service') }}">Служебное</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

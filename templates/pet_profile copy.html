@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Pet Management - Pet Profile{% endblock %}
+
+{% block content %}
+    <h1>Личный кабинет питомца</h1>
+    <table class="table table-bordered">
+        <tr>
+            <th>Имя питомца</th>
+            <th>Вес</th>
+            <th>Рост</th>
+            <th>Паспорт №</th>
+            <th>Чип № (BAR код)</th>
+            <th>Список заболеваний</th>
+            <th>Ссылка на медкарту</th>
+        </tr>
+        <tr>
+            <td>{{ pet_data['name'] }}</td>
+            <td>{{ pet_data['weight'] }}</td>
+            <td>{{ pet_data['height'] }}</td>
+            <td>{{ pet_data['passport_number'] }}</td>
+            <td><img src="https://www.webarcode.com/barcode/image.php?code={{ pet_data['chip_number'] }}&type=C128B&xres=1&height=50&width=167&font=3&output=png&style=69"></td>
+            <td>{{ ', '.join(pet_data['illnesses']) }}</td>
+            <td><a href="{{ pet_data['medical_record_link'] }}" target="_blank">Медкарта</a></td>
+        </tr>
+    </table>
+    <form method="post" action="{{ url_for('pet_profile') }}">
+        <button type="submit">Редактировать</button>
+    </form>
+{% endblock %}

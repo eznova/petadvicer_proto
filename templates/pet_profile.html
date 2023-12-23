@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Pet Management - Pet Profile{% endblock %}
+
+{% block content %}
+    <h1>Личный кабинет питомца</h1>
+    {% if not pet_data %}
+        <!-- Если нет данных о питомце, отобразить форму ввода passport_number -->
+        <form method="get" action="{{ url_for('pet_profile') }}">
+            <label for="passport_number">Введите номер паспорта:</label>
+            <input type="text" id="passport_number" name="passport_number" required>
+            <button type="submit">Найти</button>
+        </form>
+    {% else %}
+    <table class="table table-sm">
+        <thead>
+            <tr>
+                <!-- <th colspan="4" rowspan="4"><i class="bi bi-file-earmark-person" style="font-size: 7rem; color: cornflowerblue;"></i></th> -->
+                <th colspan="4" rowspan="4"><img src="{{ pet_data['photo'] }}" alt="Description" style="width: 10rem; height: 10rem; object-fit: cover; border-radius: 50%;"></th>
+                <th colspan="4"><span style="font-weight:bold">Имя: </span>{{ pet_data['name'] }}</th>
+            </tr>
+            <tr>
+                <td>Паспорт: {{ pet_data['passport_number'] }}</td>
+                <td><img src="https://www.webarcode.com/barcode/image.php?code={{ pet_data['chip_number'] }}&type=C128B&xres=1&height=50&width=167&font=3&output=png&style=69"></td>
+                <td><a href="/dummy/'{{ pet_data['medical_record_link'] }}'" target="_blank">Медкарта</a></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Возраст: {{ pet_data['age'] }} </td>
+                <td colspan="4">Вес: {{ pet_data['weight'] }} кг</td>
+                <td colspan="4">Рост: {{ pet_data['height'] }} см</td>
+            </tr>
+            <tr>
+                <td colspan="8"><span style="font-weight:bold">Заболевания:</span> <br>
+                {% for illnesse in pet_data['illnesses'] %}
+                    <li>{{ illnesse }}</li>
+                {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <td colspan="8"><span style="font-weight:bold">Cовет:</span> {{ pet_data['advice'] }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- ToDo: Исправить Method Not Allowed -->
+        <form method="post" action="/dummy/Форма редактирования данных о питомце">
+            <button type="submit">Редактировать</button>
+        </form>
+    {% endif %}
+{% endblock %}
+
+

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}Pet Management - Pet Profile Controller{% endblock %}
+
+{% block content %}
+    <h1>Личный кабинет питомца</h1>
+    <form method="get" action="{{ url_for('fill_database') }}">
+        <button type="submit">Заполнить базу данных</button>
+    </form>
+{% endblock %}
