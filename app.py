@@ -5,6 +5,7 @@ from pymongo import MongoClient
 import markdown2
 from pymongo.errors import ServerSelectionTimeoutError
 from flask_ngrok import run_with_ngrok
+# проверим, где запускаемся: у себя на компьютере или в колабе
 try: colab_mode
 except NameError: colab_mode = None
 if not colab_mode or colab_mode is None:
@@ -106,6 +107,7 @@ def fill_database():
 @app.route('/dummy/<dummy_message>', methods=['GET', 'POST'])
 def dummy(dummy_message):
     return render_template('dummy.html', dummy_message=dummy_message)
+
 # Запуск приложения
 if __name__ == '__main__':
     if colab_mode:
