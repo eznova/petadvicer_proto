@@ -12,3 +12,7 @@ requests
 # для установки нужны права администратора
 transformers
 torch
+# Предсказательная модель
+matplotlib
+pandas
+scikit-learn

@@ -86,7 +86,7 @@
         </div>
     </div>
     <hr>
-    <h3>Советы По уходу за питомцем</h3>
+    <h3>Советы по уходу за питомцем</h3>
     <div class="container">
         <div class="row">
             <div class="col-sm">
@@ -96,6 +96,26 @@
                 </div>
                 <span>
                     <li>{{ neuro_advice }}</li>
+                </span>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <span style="font-weight:bold">От экспертов</span><br>
+            <div class="col-sm-6" style="text-align: center;">
+                <a href="/article">
+                    <img style="object-fit: cover;" width="100%" src="https://s0.rbk.ru/v6_top_pics/media/img/0/95/346898653822950.webp" alt="Article photo">
+                    Развивающие игры для питомцев
+                </a>
+            </div>
+            <div class="col-sm-6">
+                <div class="alert alert-info" style="text-align: center;" role="alert">
+                    ТОП-3 производителей корма, подобранный на основании рекомендаций от наших лучших экспертов
+                </div>
+                <span>
+                    {% for item in top_three_food %}
+                        <li>{{ item }}</li>
+                    {% endfor %}
                 </span>
             </div>
         </div>

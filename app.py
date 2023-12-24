@@ -4,22 +4,27 @@ from flask_bootstrap import Bootstrap
 from pymongo import MongoClient
 import markdown2
 from pymongo.errors import ServerSelectionTimeoutError
-from src.sample_data import *
-from src.walk_data import *
-from src.gpt import generate_advice
 from flask_ngrok import run_with_ngrok
-from src.config import ngrok_mode
-
+try: colab_mode
+except NameError: colab_mode = None
+if not colab_mode or colab_mode is None:
+    print('Running in standalone mode')
+    from src.sample_data import *
+    from src.walk_data import *
+    from src.gpt import generate_advice
+    from src.config import colab_mode
+    from src.predictive import get_food_advice
 
 # Инициализация приложения и его оформления
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
-if ngrok_mode:
+if colab_mode:
     run_with_ngrok(app)
 
 try:
     # Попытка подключения к MongoDB
-    client = MongoClient('mongodb://localhost:27017/', serverSelectionTimeoutMS=2000)
+    # client = MongoClient('mongodb://localhost:27017/', serverSelectionTimeoutMS=2000)
+    client = MongoClient('mongodb+srv://hcistudents2023:jRb2mP26RCxHy7Cf@cluster2023.krjxaxj.mongodb.net/', serverSelectionTimeoutMS=3000)
     db = client['pets_database']
     pets_collection = db['pets']
 except ServerSelectionTimeoutError:
@@ -58,10 +63,11 @@ def pet_profile():
 
     weather = get_weather('Saint-Petersburg')
     walk_advice = get_walk_advice(weather, pet_data)
+    top_three_food = get_food_advice()
     if request.method == 'POST':
         return render_template('dummy.html', dummy_message="Вызов формы для редактирования данных питомца")
     else:
-        return render_template('pet_profile.html', pet_data=pet_data, weather=weather, walk_advice=walk_advice, neuro_advice=neuro_advice)
+        return render_template('pet_profile.html', pet_data=pet_data, weather=weather, walk_advice=walk_advice, neuro_advice=neuro_advice, top_three_food=top_three_food)
 
 # Метод для отображения информации о проекте и авторе
 @app.route('/about')
@@ -77,6 +83,10 @@ def about():
 @app.route('/service')
 def service():
     return render_template('service.html')
+
+@app.route('/article')
+def article():
+    return render_template('article.html')
 
 # Служебный метод API на случай, если база создана, но не была настроена, а в консоли это делать лень
 @app.route('/fill_database')
@@ -98,7 +108,7 @@ def dummy(dummy_message):
     return render_template('dummy.html', dummy_message=dummy_message)
 # Запуск приложения
 if __name__ == '__main__':
-    if ngrok_mode:
+    if colab_mode:
         app.run()
     else:
         app.run(debug=True)

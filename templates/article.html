@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Pet Management - Articles{% endblock %}
+
+{% block content %}
+    <h1>Советы по уходу за питомцем</h1>
+    <p>Автор: Эксперт 1</p>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <img style="object-fit: cover;" width="100%" src="https://s0.rbk.ru/v6_top_pics/media/img/0/95/346898653822950.webp" alt="Article photo">
+            </div>
+            <div class="col-sm-8">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer eu urna vitae elit venenatis vestibulum. Quisque vel lacus eu augue eleifend iaculis. Sed ut purus quis libero consequat auctor. Duis ac urna a tortor dapibus facilisis. Vivamus tincidunt ultrices sapien vel sollicitudin. Nullam scelerisque mi vel libero bibendum, vel gravida lectus fringilla. Proin sit amet ipsum at purus tincidunt sodales a nec velit. Aenean vestibulum ex ac neque tincidunt, vel euismod velit sodales.
+
+                    Suspendisse potenti. Nulla facilisi. Nulla facilisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Etiam euismod ligula eu justo aliquam lacinia. Nam nec commodo lectus, ut accumsan nisi. Fusce efficitur nunc eu erat posuere, vitae sagittis sapien feugiat. Vestibulum vel metus ac elit fermentum euismod. Nunc rhoncus, mauris vel ultricies luctus, augue lectus tristique massa, eu aliquet orci elit in lectus. Nam ac risus vitae turpis euismod laoreet. Integer laoreet turpis a augue egestas, sit amet aliquet enim hendrerit. Aliquam ac enim sit amet odio efficitur eleifend.
+                    
+                    Phasellus ac eros et sem malesuada ullamcorper. Suspendisse nec arcu nec nunc hendrerit sagittis a a ligula. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean non leo vel quam vehicula scelerisque. Fusce vel ex at justo malesuada mattis. Vestibulum ut lectus non elit imperdiet consequat. Quisque fringilla elit eu euismod venenatis. Maecenas ut neque ut dolor pellentesque malesuada. Duis scelerisque, tortor et varius ullamcorper, turpis purus cursus odio, eu ultricies metus sem eu neque.
+                    
+                    Curabitur in purus sit amet felis pellentesque bibendum nec at velit. Maecenas ultricies, ligula nec congue feugiat, odio libero scelerisque velit, ut interdum urna lectus nec ex. Ut auctor velit eget ex cursus, vel vehicula nisl malesuada. Vestibulum feugiat tristique quam, nec varius turpis posuere eu. In hac habitasse platea dictumst. Vivamus in ultrices neque, at pharetra dolor. Suspendisse potenti. Pellentesque sit amet justo at nunc ultricies suscipit vitae vitae leo. Phasellus eget quam vitae dolor suscipit condimentum vel ac libero. In nec arcu ut urna dapibus iaculis vel id metus. Sed tincidunt odio et dui accumsan, nec vestibulum velit varius.
+                    </p>
+            </div>
+        </div>
+    </div>
+    <a href="{{ url_for('index') }}">Вернуться на главную</a>
+{% endblock %}
