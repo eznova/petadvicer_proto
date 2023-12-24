@@ -7,10 +7,15 @@ from pymongo.errors import ServerSelectionTimeoutError
 from src.sample_data import *
 from src.walk_data import *
 from src.gpt import generate_advice
+from flask_ngrok import run_with_ngrok
+from src.config import ngrok_mode
+
 
 # Инициализация приложения и его оформления
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
+if ngrok_mode:
+    run_with_ngrok(app)
 
 try:
     # Попытка подключения к MongoDB
@@ -93,4 +98,7 @@ def dummy(dummy_message):
     return render_template('dummy.html', dummy_message=dummy_message)
 # Запуск приложения
 if __name__ == '__main__':
-    app.run(debug=True)
+    if ngrok_mode:
+        app.run()
+    else:
+        app.run(debug=True)
