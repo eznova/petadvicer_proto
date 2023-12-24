@@ -6,18 +6,28 @@
     <h1>Личный кабинет питомца</h1>
     {% if not pet_data %}
         <!-- Если нет данных о питомце, отобразить форму ввода passport_number -->
-        <form method="get" action="{{ url_for('pet_profile') }}">
-            <label for="passport_number">Введите номер паспорта:</label>
-            <input type="text" id="passport_number" name="passport_number" required>
-            <button type="submit">Найти</button>
+        <h3 style="text-align: center;">Авторизация</h3>
+        <form action="{{ url_for('pet_profile') }}" style="max-width: 300px; margin: 0 auto;">
+            <label for="passport_number">№ паспорта:</label>
+            <input type="text" id="passport_number" name="passport_number" required style="width: 100%;">
+            <label for="password">Пароль:</label>
+            <input type="password" id="password" name="password" style="width: 100%;">
+            <p></p>
+            <button class="btn"  type="submit" style="width: 100%;">Войти</button>
         </form>
     {% else %}
+    <h3>Карточка</h3>
     <table class="table table-sm">
         <thead>
             <tr>
                 <!-- <th colspan="4" rowspan="4"><i class="bi bi-file-earmark-person" style="font-size: 7rem; color: cornflowerblue;"></i></th> -->
                 <th colspan="4" rowspan="4"><img src="{{ pet_data['photo'] }}" alt="Description" style="width: 10rem; height: 10rem; object-fit: cover; border-radius: 50%;"></th>
                 <th colspan="4"><span style="font-weight:bold">Имя: </span>{{ pet_data['name'] }}</th>
+                <th>
+                    <form method="post" action="/dummy/Форма редактирования данных о питомце">
+                        <button class="btn" type="submit">Редактировать</button>
+                    </form>
+                </th>
             </tr>
             <tr>
                 <td>Паспорт: {{ pet_data['passport_number'] }}</td>
@@ -39,14 +49,73 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="8"><span style="font-weight:bold">Cовет:</span> {{ pet_data['advice'] }}</td>
+                <td colspan="8"><span style="font-weight:bold">Совет от владельца:</span> {{ pet_data['advice'] }}</td>
             </tr>
         </tbody>
     </table>
-    <!-- ToDo: Исправить Method Not Allowed -->
-        <form method="post" action="/dummy/Форма редактирования данных о питомце">
-            <button type="submit">Редактировать</button>
-        </form>
+    <hr>
+    <h3>Прогулка</h3>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <table border="0">
+                    <tr>
+                        <td rowspan="3">
+                            <img src="https:{{ weather['icon'] }}" alt="Weather Image" height="100">
+                        </td>
+                        <!-- Второй столбец с информацией -->
+                        <td>Температура: {{ weather['temp'] }}°C</td>
+                    </tr>
+                    <tr>
+                        <!-- Вторая строка второго столбца -->
+                        <td>Скорость ветра: {{ weather['wind'] }} м/с</td>
+                    </tr>
+                    <tr>
+                        <!-- Третья строка второго столбца -->
+                        <td>Город: {{ weather['city'] }}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-sm-8">
+                <span style="font-weight:bold">Советы по условиям прогулки</span><br>
+                <span>
+                    <li>{{ walk_advice['temp_advice'] }}</li>
+                    <li>{{ walk_advice['wind_advice'] }}</li>
+                </span>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <h3>Советы По уходу за питомцем</h3>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <span style="font-weight:bold">От нейро-сети</span><br>
+                <div class="alert alert-warning" style="text-align: center;" role="alert">
+                    Помните, советы, сгенерированные нейро-сетью, могут быть ошибочными
+                </div>
+                <span>
+                    <li>{{ neuro_advice }}</li>
+                </span>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="container">
+        <div class="row">
+            <h3>Действия</h3>
+            <div class="col-sm-4">
+                <form method="post" action="/dummy/Обратиться в страховую компанию">
+                    <button class="btn btn-warning" type="submit">Обратиться в страховую компанию</button>
+                </form>
+            </div>
+            <div class="col-sm-4">
+                <form method="post" action="/dummy/Сделать запрос к умной кормушке">
+                    <button class="btn" type="submit"><img height="20pem" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Yandex_icon.svg/1200px-Yandex_icon.svg.png" alt="Yandex API">Покормить питомца</button>
+                </form>
+            </div>
+        </div> 
+    </div>
     {% endif %}
 {% endblock %}
 

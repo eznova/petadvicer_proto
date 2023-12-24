@@ -1,4 +1,14 @@
+# Flask
 Flask
-pymongo
+flask-ngrok
 Flask-Bootstrap
+# MongoDB
+pymongo
+# Форматирование импортированных md файлов
 markdown2
+# Запросы
+requests
+# Нейросети
+# для установки нужны права администратора
+transformers
+torch

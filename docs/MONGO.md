@@ -7,7 +7,7 @@ Follow these steps to install MongoDB on your system:
 Linux:
 ```bash
 sudo apt-get update
-sudo apt-get install -y mongodb
+sudo apt-get install -y mongodb >log
 ```
 
 ### 2. Start MongoDB
@@ -15,6 +15,7 @@ Linux:
 ```bash
 sudo service mongod start
 ```
+
 3. Access MongoDB Shell
 Open a new terminal or Command Prompt window and run:
 ```bash
