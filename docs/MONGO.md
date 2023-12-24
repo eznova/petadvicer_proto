@@ -1,5 +1,5 @@
 MongoDB Installation and Configuration
-This guide provides step-by-step instructions for installing and configuring MongoDB for the Flask Pet Management App.
+This guide provides step-by-step instructions for installing and configuring MongoDB for the Flask me&мася App.
 
 ### 1. Install MongoDB
 Follow these steps to install MongoDB on your system:
