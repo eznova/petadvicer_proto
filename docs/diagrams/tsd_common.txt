@@ -1,0 +1,14 @@
+@startuml
+actor "Pet Owner" as a1
+participant UI as p1
+participant Server as p2
+participant "Weather API" as p3
+participant "Yandex API" as p4
+participant "GPT API" as p5
+participant "Insuarance API" as p6
+participant "BarCode API" as p7
+participant "Medical Card API" as p8
+participant "DB" as p9
+
+autonumber
+@enduml
