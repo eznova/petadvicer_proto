@@ -1,0 +1,47 @@
+@startuml C4_Components
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+Person(user, "Pet Owner", "Владелец питомца")
+
+System_Ext(WeatherAPI, "Weather", "Информация о погоде")
+System_Ext(YandexAPI, "Yandex", "Управление устройствами умного дома")
+System_Ext(InsuaranceAPI, "Insuarance", "Связь со страховой компанией")
+System_Ext(GPTAPI, "GPT2", "Языковая модель")
+System_Ext(MedCardAPI, "MedCard", "Система управления данными в ветклиниках")
+System_Ext(BarCodeAPI, "BarCode", "Система генерации bar кодов")
+
+System_Boundary(petAssistantSystem, "me&мася"){
+  Container_Boundary(webAppContainer, "Web Application"){
+    Component(webApp, "Web Application", "Интерфейс для пользователей ПК")
+    Component(webAppBack, "Web Application Backend", "Backend для пользователей ПК")
+  }
+  Component(apiApp, "API Application", "Интерфейс для приложений \nдля взаимодействия с конечными данными")
+  Component(WeatherAPIController, "Weather API Application", "Интерфейс для Weather API. ")
+  Component(AdviceController, "Advice Application", "Формирует советы по прогулке на основании погоди и данных питомца ")
+  Component(YandexAPIController, "Yandex API Application", "Интерфейс для Yandex API. Обеспечивает управление устройствами умного дома")
+  Component(InsuaranceAPIController, "Insuarance API Application", "Интерфейс для Insuarance API. Формирует запрос в страховую компанию")
+  Component(GPTAPIController, "GPT API Application", "Интерфейс для GPT API. Отправляет запрос НС и подготавливает ответ пользователю")
+  Component(MedCardAPIController, "MedCard API Application", "Интерфейс для MedCard API. Запрашивает и возвращает пользователю медкарту питомца")
+  Component(BarCodeAPIController, "BarCode API Application", "Интерфейс для BarCodeAPI. Запрашивает изображение BarCode на основании данных чипа питомца")
+  ContainerDb(db, "Database", "Хранит данные о питомцах, пользователях и запросах")
+}
+
+user <--> webApp : "Uses"
+webAppBack <--> apiApp : "Uses"
+webApp <--> webAppBack : "Uses"
+apiApp <--> db : "Reads from and write to"
+apiApp <--> AdviceController : "uses"
+apiApp <--> WeatherAPIController : "uses"
+WeatherAPIController <--> WeatherAPI : "Uses"
+apiApp <--> YandexAPIController : "uses"
+YandexAPIController <--> YandexAPI : "Uses"
+apiApp <--> InsuaranceAPIController : "uses"
+InsuaranceAPIController <--> InsuaranceAPI : "Uses"
+apiApp <--> GPTAPIController : "uses"
+GPTAPIController <--> GPTAPI : "Uses"
+apiApp <--> MedCardAPIController : "uses"
+MedCardAPIController <--> MedCardAPI : "Uses"
+apiApp <--> BarCodeAPIController : "uses"
+BarCodeAPIController <--> BarCodeAPI : "Uses"
+
+
+@enduml

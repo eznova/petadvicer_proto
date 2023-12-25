@@ -1,0 +1,28 @@
+@startuml C4_Containers
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+Person(user, "Pet Owner", "Владелец питомца")
+System_Ext(WeatherAPI, "Weather", "Информация о погоде")
+System_Ext(YandexAPI, "Yandex", "Управление устройствами умного дома")
+System_Ext(InsuaranceAPI, "Insuarance", "Связь со страховой компанией")
+System_Ext(GPTAPI, "GPT2", "Языковая модель")
+System_Ext(MedCardAPI, "MedCard", "Система управления данными в ветклиниках")
+System_Ext(BarCodeAPI, "BarCode", "Система генерации bar кодов")
+
+System_Boundary(petAssistantSystem, "me&мася"){
+  Container(webApp, "Web Application", "Интерфейс для пользователей ПК")
+  Container(apiApp, "API Application", "Интерфейс для приложений \nдля взаимодействия с конечными данными")
+  ContainerDb(db, "Database", "Хранит данные о питомцах, пользователях и запросах")
+}
+
+user <--> webApp : "Uses"
+webApp <--> apiApp : "Uses"
+apiApp <--> db : "Reads from and write to"
+apiApp <-left-> WeatherAPI : "Uses"
+apiApp <-left-> YandexAPI : "Uses"
+apiApp <-left-> InsuaranceAPI : "Uses"
+apiApp <-right-> GPTAPI : "Uses"
+apiApp <-right-> MedCardAPI : "Uses"
+apiApp <-right-> BarCodeAPI : "Uses"
+
+@enduml

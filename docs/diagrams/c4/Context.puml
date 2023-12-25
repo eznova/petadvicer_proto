@@ -1,0 +1,20 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+Person(user, "Pet Owner", "Владелец питомца")
+System(petAssistant, "me&мася", "Приложение, помогающее содержать питомца")
+System_Ext(WeatherAPI, "Weather", "Информация о погоде")
+System_Ext(YandexAPI, "Yandex", "Управление устройствами умного дома")
+System_Ext(InsuaranceAPI, "Insuarance", "Связь со страховой компанией")
+System_Ext(GPTAPI, "GPT2", "Языковая модель")
+System_Ext(MedCardAPI, "MedCard", "Система управления данными в ветклиниках")
+System_Ext(BarCodeAPI, "BarCode", "Система генерации bar кодов")
+
+user <--> petAssistant : "User requested info"
+petAssistant <--> WeatherAPI : "Предоставляет погоду по запросу"
+petAssistant <--> YandexAPI: "Обеспечивает управление устройствами умного дома"
+petAssistant <--> InsuaranceAPI: "Обеспечивает связь с страховой компанией"
+petAssistant <--> GPTAPI: "Генерирует советы на основе лингвистической модели"
+petAssistant <--> MedCardAPI: "Предоставляет мед.карту питомца по запросу"
+petAssistant <--> BarCodeAPI: "Генерирует bar код на основании запроса"
+@enduml
